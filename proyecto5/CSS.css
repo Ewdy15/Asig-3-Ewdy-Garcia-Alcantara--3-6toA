@@ -1,76 +1,96 @@
-*{
-    font-family:Arial, Helvetica, sans-serif;
+
+:root {
+    --gris-oscuro: #183B4E;
+    --gris-medio: #547C8A;
+    --plateado: #B8D5DC;
+    --blanco: #F4F8F8;
 }
 
-section{
-    background-color: rgb(229, 231, 227);
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+section {
+    background-color: var(--plateado);
     border-radius: 5px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-areas: 
-    "reistrarRegla  comprobarAcceso "
+    grid-template-areas:
+    "reistrarRegla comprobarAcceso"
     "reglasRegistradas historialAcceso";
     gap: 10px;
     padding: 10px;
 }
 
-.secciones{
-    background-color: rgb(40, 81, 218);
+.secciones {
+    background-color: var(--gris-oscuro);
+    color: var(--blanco);
     padding: 5px;
-    border: 1px solid;
+    border: 1px solid var(--gris-medio);
     border-radius: 5px;
 }
 
-.titulo{
+.titulo {
     margin: 0;
     font-size: 20px;
-    border-bottom: 1px solid;
-    background-color: rgb(255, 255, 254);
+    border-bottom: 1px solid var(--gris-medio);
+    background-color: var(--blanco);
+    color: var(--gris-oscuro);
     border-radius: 5px;
     padding: 3px;
 }
 
-input[type="number"] { 
-    border: 1px white solid;
-    background-color: white;
+input[type="number"] {
+    border: 1px solid var(--gris-medio);
+    background-color: var(--blanco);
     font-size: 16px;
     height: 30px;
     border-radius: 5px;
 }
 
-.botones{
+.botones {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-button, select{
-    border: 1px white solid;
-    background-color: white;
+button, select {
+    border: 1px solid var(--gris-medio);
+    background-color: var(--blanco);
+    color: var(--gris-oscuro);
     border-radius: 5px;
     font-size: 16px;
     height: 30px;
     cursor: pointer;
 }
-#reistrarRegla{
+
+button:hover {
+    background-color: var(--gris-medio);
+    color: var(--blanco);
+}
+
+#reistrarRegla {
     grid-area: reistrarRegla;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
-#reglasRegistradas{
+
+#reglasRegistradas {
     grid-area: reglasRegistradas;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
-#comprobarAcceso{
+
+#comprobarAcceso {
     grid-area: comprobarAcceso;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
-#historialAcceso{
+
+#historialAcceso {
     grid-area: historialAcceso;
     display: flex;
     flex-direction: column;
@@ -80,15 +100,14 @@ button, select{
 
 /* TABLA */
 table {
-    background-color: white;
+    background-color: var(--blanco);
     width: 100%;
     border-collapse: collapse;
-
 }
 
 th,
 td {
-    border: 1px solid black;
+    border: 1px solid var(--gris-medio);
     padding: 4px;
     white-space: nowrap;
     border-radius: 5px;
