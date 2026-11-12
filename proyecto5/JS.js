@@ -1,3 +1,4 @@
+
 //alert("funciona");
 
 const nuevadireccionIP = document.getElementById("agreDireccionIP");
@@ -15,19 +16,37 @@ const tipoacceso = document.getElementById("tipoacceso");
 let regla = [];
 let id = 1;
 
+// Colocar puntos automaticamente a la IP
+function colocarPuntos(ip) {
+    const numeros = ip.replace(/\D/g, "").slice(0, 12);
+    const bloques = [];
+
+    for (let i = 0; i < numeros.length; i += 3) {
+        bloques.push(numeros.slice(i, i + 3));
+    }
+
+    return bloques.join(".");
+}
+
+// Agregar puntos automaticamente al escribir
+nuevadireccionIP.addEventListener("input", function () {
+    nuevadireccionIP.value = colocarPuntos(nuevadireccionIP.value);
+});
+
+compdireccionIP.addEventListener("input", function () {
+    compdireccionIP.value = colocarPuntos(compdireccionIP.value);
+});
+
 // Validar formato de direccion IP
 function validarIP(ip) {
     let partes = ip.split(".");
+
     if (partes.length !== 4) {
         return false;
     }
 
     for (let parte of partes) {
-        if (
-            parte === "" ||
-            !/^\d+$/.test(parte) ||
-            Number(parte) > 255
-        ) {
+        if (parte === "" || !/^\d+$/.test(parte)) {
             return false;
         }
     }
@@ -37,13 +56,7 @@ function validarIP(ip) {
 
 // Validar puerto
 function validarPuerto(puerto) {
-    let numero = Number(puerto);
-    return (
-        puerto.trim() !== "" &&
-        Number.isInteger(numero) &&
-        numero >= 1 &&
-        numero <= 65535
-    );
+    return /^\d{4}$/.test(puerto.trim());
 }
 
 // Validar campos para agregar una regla
@@ -60,13 +73,13 @@ agreRegla.addEventListener("click", function () {
 
     // Validar formato de IP
     if (!validarIP(nuevaIP)) {
-        alert("ERROR: La direccion IP no es valida. Debe contener cuatro bloques numericos entre 0 y 255, separados por puntos.");
+        alert("ERROR: Escriba cuatro bloques de numeros separados por puntos. Ejemplo: 123.456.632.111.");
         return;
     }
 
     // Validar puerto
     if (!validarPuerto(nuevoPuerto.value)) {
-        alert("ERROR: Introduzca un puerto valido entre 1 y 65535. Ejemplo: 8080");
+        alert("ERROR: El puerto debe contener exactamente 4 digitos. Ejemplo: 0443, HTTPS usa el puerto 443.");
         return;
     }
 
@@ -104,14 +117,17 @@ agreRegla.addEventListener("click", function () {
 
     // Actualizar tabla de reglas registradas
     cuerpoTablaRR.innerHTML = "";
+
     regla.forEach(function (item) {
         const fila = document.createElement("tr");
+
         fila.innerHTML = `
             <td>${item.id}</td>
             <td>${item.direccionip}</td>
             <td>${item.puerto}</td>
             <td>${item.tipo}</td>
         `;
+
         cuerpoTablaRR.appendChild(fila);
     });
 
@@ -119,9 +135,11 @@ agreRegla.addEventListener("click", function () {
 
     // Mostrar datos del Array
     let infoarray = "Datos del Array:\n";
+
     regla.forEach(function (item) {
         infoarray += `ID: ${item.id} | IP: ${item.direccionip} | Puerto: ${item.puerto} | Tipo: ${item.tipo}\n`;
     });
+
     alert(infoarray);
 
     // Limpiar campos
@@ -129,6 +147,7 @@ agreRegla.addEventListener("click", function () {
     nuevoPuerto.value = "";
     tipoRegla.value = "";
 });
+
 
 // Validar acceso
 validadAcceso.addEventListener("click", function () {
@@ -143,13 +162,13 @@ validadAcceso.addEventListener("click", function () {
 
     // Validar formato de IP
     if (!validarIP(compIP)) {
-        alert("ERROR: La direccion IP no tiene un formato IPv4 valido. Utilice el formato: 192.168.1.10");
+        alert("ERROR: Escriba cuatro bloques de numeros separados por puntos. Ejemplo: 123.456.632.111.");
         return;
     }
 
     // Validar puerto
     if (!validarPuerto(compPuerto.value)) {
-        alert("ERROR: Introduzca un puerto valido entre 1 y 65535. Ejemplo: 8080");
+        alert("ERROR: El puerto debe contener exactamente 4 digitos. Ejemplo: 0443, HTTPS usa el puerto 443.");
         return;
     }
 
@@ -165,6 +184,7 @@ validadAcceso.addEventListener("click", function () {
             compP === regla[j].puerto
         ) {
             infoarray += `ID: ${regla[j].id} | IP: ${regla[j].direccionip} | Puerto: ${regla[j].puerto} | Tipo: ${regla[j].tipo}\n`;
+
             encontrado = true;
             idRegla = regla[j].id;
 
@@ -173,6 +193,7 @@ validadAcceso.addEventListener("click", function () {
             } else {
                 resultado = "Bloqueado";
             }
+
             break; // si se encuentra para
         }
     }
@@ -181,7 +202,7 @@ validadAcceso.addEventListener("click", function () {
     if (encontrado) {
         alert(infoarray);
     } else {
-        alert("ERROR: No existe una regla registrada para esta combinacion exacta de IP y puerto.");
+        alert("No existe una regla registrada para esta combinacion exacta de IP y puerto. El acceso quedara bloqueado.");
     }
 
     // Estado del acceso
@@ -193,11 +214,13 @@ validadAcceso.addEventListener("click", function () {
 
     // Registrar historial de acceso
     const fila = document.createElement("tr");
+
     fila.innerHTML = `
         <td>${idRegla}</td>
         <td>${compIP}</td>
         <td>${compP}</td>
         <td>${resultado}</td>
     `;
+
     cuerpoTablaHA.appendChild(fila);
 });
