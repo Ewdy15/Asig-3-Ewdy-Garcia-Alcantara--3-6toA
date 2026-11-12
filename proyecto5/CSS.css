@@ -1,0 +1,95 @@
+*{
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+section{
+    background-color: rgb(229, 231, 227);
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: 
+    "reistrarRegla  comprobarAcceso "
+    "reglasRegistradas historialAcceso";
+    gap: 10px;
+    padding: 10px;
+}
+
+.secciones{
+    background-color: rgb(40, 81, 218);
+    padding: 5px;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+.titulo{
+    margin: 0;
+    font-size: 20px;
+    border-bottom: 1px solid;
+    background-color: rgb(255, 255, 254);
+    border-radius: 5px;
+    padding: 3px;
+}
+
+input[type="number"] { 
+    border: 1px white solid;
+    background-color: white;
+    font-size: 16px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.botones{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+button, select{
+    border: 1px white solid;
+    background-color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    height: 30px;
+    cursor: pointer;
+}
+#reistrarRegla{
+    grid-area: reistrarRegla;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+#reglasRegistradas{
+    grid-area: reglasRegistradas;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+#comprobarAcceso{
+    grid-area: comprobarAcceso;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+#historialAcceso{
+    grid-area: historialAcceso;
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    gap: 10px;
+}
+
+/* TABLA */
+table {
+    background-color: white;
+    width: 100%;
+    border-collapse: collapse;
+
+}
+
+th,
+td {
+    border: 1px solid black;
+    padding: 4px;
+    white-space: nowrap;
+    border-radius: 5px;
+}

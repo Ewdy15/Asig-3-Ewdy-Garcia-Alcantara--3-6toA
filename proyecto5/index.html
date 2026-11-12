@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS.css">
+    <title>Proyecto 5: Simulador de cortafuegos</title>
+</head>
+<body>
+    <main>
+        <section>
+            <div class="secciones" id="reistrarRegla">
+                <p class="titulo">Registrar Regla</p>
+                <div> 
+                    <input type="number" placeholder="Direccion IP" id="agreDireccionIP">
+                    <input type="number" placeholder="Puerto" id="agrePuerto">
+                </div>
+
+                <div class="botones">
+                    <select id="permisoRegla">
+                        <option value="">Selecciona una Regla</option>
+                        <option value="permitir">Permitir</option>
+                        <option value="bloquear">Bloquear</option>
+                    </select>
+
+                    <button id="agregarRegla">Agregar Regla</button>
+                </div>
+            </div>
+
+            <div class="secciones" id="reglasRegistradas">
+                <p class="titulo">Reglas Registradas</p>
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>IP</th>
+                                <th>Puerto</th>
+                                <th>Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpoTablaRR">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="secciones" id="comprobarAcceso">
+                <p class="titulo">Comprobar Acceso</p>
+                <div> 
+                    <input type="number" placeholder="Direccion IP" id="compDireccionIP">
+                    <input type="number" placeholder="Puerto" id="compPuerto">
+                </div>
+
+                <div class="botones">
+                    <button type="button" id="validadAcceso">Validar Acceso</button>
+                    <button type="button" id="tipoacceso">Tipo de acceso del ID</button>
+                    <!--se mostrara el tipo de acceso
+                    si este es permitido aparecera acceso permitido
+                    y si es bloqueado debe de aparecer acceso bloqueado
+                    -->
+                </div>
+            </div>
+
+            <div class="secciones" id="historialAcceso">
+                <p class="titulo">Historial Acceso</p>
+
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>IP</th>
+                                <th>Puerto</th>
+                                <th>Resultado</th>
+                            </tr>
+                        </thead>
+                        <tbody  id="cuerpoTablaHA">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="JS.js"></script>
+</body>
+</html>
